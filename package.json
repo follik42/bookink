@@ -1,0 +1,28 @@
+{
+  "name": "bookink",
+  "version": "1.0.0",
+  "description": "bookink xdd",
+  "scripts": {
+    "start": "http-server -p 3000",
+    "build": "rd -r public\\scripts 2>null && tsc",
+    "build:dev": "rd -r public\\scripts 2>null & tsc -p tsconfig.dev.json",
+    "tsc":"tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/follik42/bookink.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/follik42/bookink/issues"
+  },
+  "homepage": "https://github.com/follik42/bookink#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.31.0",
+    "http-server": "^14.1.1",
+    "typescript": "^4.9.4"
+  }
+}
