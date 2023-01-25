@@ -3,7 +3,7 @@ import { renderBlock } from './lib.js';
 export function renderUserBlock(
   name: string,
   src: string,
-  countFavirited: number
+  countFavirited?: number
 ) {
   const favoritesCaption = countFavirited < 1 ? 'ничего нет' : countFavirited
   const hasFavoriteItems = countFavirited > 0 ? true : false;
@@ -23,3 +23,5 @@ export function renderUserBlock(
     `
   );
 }
+
+

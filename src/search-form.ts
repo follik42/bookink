@@ -1,5 +1,15 @@
 import { renderBlock } from './lib.js'
 
+
+export interface ISearchFormData {
+  startDate: string,
+  endDate: string,
+  maxPrice: number
+}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface IPlace { }
+
+
 export function renderSearchFormBlock(startDate: string = getDefaultDate().startDate, endDate: string = getDefaultDate().endDate) {
   const min_date = getMinDate();
   const maxDate = getMaxDate();
@@ -33,7 +43,7 @@ export function renderSearchFormBlock(startDate: string = getDefaultDate().start
             <input id="max-price" type="text" value="" name="price" class="max-price" />
           </div>
           <div>
-            <div><button>Найти</button></div>
+            <div><button id="searchButton">Найти</button></div>
           </div>
         </div>
       </fieldset>
@@ -77,6 +87,49 @@ function getMaxDate(): string {
   return `${year}-${month_max_date}-${day_max_date.getDate()}`
 }
 
-// function getCurrentDate(): string {
-//   const date = new Date();
-// }
+// функция обработчик формы  ----- 2.
+setTimeout(() => {
+  const buttonSeact = document.querySelector('#searchButton');
+  console.log(buttonSeact)
+  buttonSeact.addEventListener('click', () => {
+    event.preventDefault();
+    const start = document.querySelector('#check-in-date') as HTMLInputElement;
+    const end = document.querySelector('#check-out-date') as HTMLInputElement;
+    const maxPrice = document.querySelector('#max-price') as HTMLInputElement;
+    const searchData: ISearchFormData = {
+      startDate: start.value,
+      endDate: end.value,
+      maxPrice: Number(maxPrice.value)
+    }
+    search(searchData, callBack);
+  })
+}, 500)
+
+interface ISearchCallback {
+  (error?: string, places?: IPlace[]): void
+}
+
+
+/**
+ * function search
+ * @param data ISearchFormData
+ */
+export function search(data: ISearchFormData, cb: ISearchCallback): void {
+  console.log(data);
+  setTimeout(() => {
+    if ((Math.floor(Math.random() * 100)) > 50) {
+      cb('error');
+    } else {
+      cb(null, []);
+    }
+  }, 2000)
+}
+
+// function callback
+const callBack: ISearchCallback = (error, places) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(places);
+  }
+}
